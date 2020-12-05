@@ -1782,6 +1782,40 @@ function refreshHooks() {
     //belchertown_debug(mqtt_payload);
 }
 
+// XXX
+function setBeaufCount(count) {
+    text = "";
+    if ( count < 0.5 ) {
+        text = "Calme";
+    } else if ( count < 1.5 ) {
+        text = "Très légère brise";
+    } else if ( count < 2.5 ) {
+        text = "Légère brise";
+    } else if ( count < 3.5 ) {
+        text = "Petite brise";
+    } else if ( count < 4.5 ) {
+        text = "Jolie brise";
+    } else if ( count < 5.5 ) {
+        text = "Bonne brise";
+    } else if ( count < 6.5 ) {
+        text = "Vent frais";
+    } else if ( count < 7.5 ) {
+        text = "Grand frais";
+    } else if ( count < 8.5 ) {
+        text = "Coup de vent";
+    } else if ( count < 9.5 ) {
+        text = "Fort coup de vent";
+    } else if ( count < 10.5 ) {
+        text = "Tempête";
+    } else if ( count < 11.5 ) {
+        text = "Violente tempête";
+    } else {
+        text = "Ouragan";
+    }
+
+    jQuery(".curbeaufcount").html( "Force " + Math.trunc(parseFloat(count)) + " beaufort : " + text );
+}
+
 // Handle MQTT message
 function update_current_wx(data) {
     data = jQuery.parseJSON(data);
@@ -1961,6 +1995,10 @@ function update_current_wx(data) {
     // Windchill Metric
     if (data.hasOwnProperty("windchill_C")) {
         jQuery(".curwindchill").html(parseFloat(parseFloat(data["windchill_C"])).toLocaleString("$system_locale_js", {minimumFractionDigits: unit_rounding_array["windchill"], maximumFractionDigits: unit_rounding_array["windchill"]}) + "$unit.label.outTemp");
+    }
+    // XXX
+    if ( data.hasOwnProperty("beaufort_count") ) {
+        setBeaufCount(data["beaufort_count"]);
     }
 };
 #end if
