@@ -1,2 +1,3 @@
 User-agent: * 
 Disallow: 
+Sitemap: https://meteo-auffargis.decoodt.eu/sitemap.xml
