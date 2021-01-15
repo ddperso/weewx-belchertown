@@ -13,8 +13,7 @@
         <li><a href="http://www.meteociel.fr/temps-reel/obs_villes.php?code2=355" target="_blank">Meteociel</a></li>
         <li><a href="https://www.wunderground.com/weather/IAUFFA1" target="_blank">Weather Underground</a></li>
         <li><a href="https://www.pwsweather.com/station/pws/auffargis1" target="_blank">Personal Weather Station</a></li>
-        <li><a href="https://app.weathercloud.net/d8571346530#profile" target="_blank">Weathercloud</a></li>
-        <li><a href="https://wow.metoffice.gov.uk/observations/details/20200810gw996wg4hhe6ix3byyb96scnkr" target="_blank">Weather Observations Website</a></li>
+        <li><a href="https://app.weathercloud.net/d8571346530#current" target="_blank">Weathercloud</a></li>
         <li><a href="http://www.findu.com/cgi-bin/panel.cgi?call=FW8134&units=metric&xsize=1000&bgcolor=0,0,0&rcolor=0,255,0&acolor=255,0,255&fcolor=255,0,0&led=1&notext=1&nowindchill=1" target="_blank">Citizen Weather Observer Program</a></li>
         <li><a href="https://www.awekas.at/fr/instrument.php?id=17214" target="_blank">Système automatique de cartes AWEKAS</a></li>
     </ul>
