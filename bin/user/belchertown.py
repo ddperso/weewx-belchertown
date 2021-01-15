@@ -1508,6 +1508,21 @@ class getData(SearchList):
             elif aqi_dominant == "pm10":
                 aqi_dominant = label_dict["aqi_pm10"]
             else:
+                aqi_category = "unknown"
+					
+            if aqi_dominant == "pm2.5":
+                aqi_dominant = label_dict["aqi_pm25"]
+            elif aqi_dominant == "o3":
+                aqi_dominant = label_dict["aqi_o3"]
+            elif aqi_dominant == "no2":
+                aqi_dominant = label_dict["aqi_no2"]
+            elif aqi_dominant == "so2":
+                aqi_dominant = label_dict["aqi_so2"]
+            elif aqi_dominant == "co":
+                aqi_dominant = label_dict["aqi_co"]
+            elif aqi_dominant == "pm10":
+                aqi_dominant = label_dict["aqi_pm10"]
+            else:
                 aqi_dominant = "unknown"
 
             try:
