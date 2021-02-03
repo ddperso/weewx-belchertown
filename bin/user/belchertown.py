@@ -1627,7 +1627,7 @@ class getData(SearchList):
                 )
             elif self.generator.skin_dict["Extras"]["earthquake_server"] == "ReNaSS":
                 earthquake_url = (
-                    "https://renass.unistra.fr/fdsnws/event/1/query?latitude=%s&longitude=%s&maxradius=5&orderby=time&format=json&limit=1&mindepth=-1"
+                    "https://renass.unistra.fr/fdsnws/event/1/query?latitude=%s&longitude=%s&maxradius=5&orderby=time&format=json&limit=1&mindepth=1"
                     % (latitude, longitude)
                 )
             elif self.generator.skin_dict["Extras"]["earthquake_server"] == "GeoNet":
