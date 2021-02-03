@@ -1625,6 +1625,11 @@ class getData(SearchList):
                     "http://earthquake.usgs.gov/fdsnws/event/1/query?limit=1&lat=%s&lon=%s&maxradiuskm=%s&format=geojson&nodata=204&minmag=2"
                     % (latitude, longitude, earthquake_maxradiuskm)
                 )
+            elif self.generator.skin_dict["Extras"]["earthquake_server"] == "ReNaSS":
+                earthquake_url = (
+                    "https://renass.unistra.fr/fdsnws/event/1/query?latitude=%s&longitude=%s&maxradius=5&orderby=time&format=json&limit=1&mindepth=-1"
+                    % (latitude, longitude)
+                )
             elif self.generator.skin_dict["Extras"]["earthquake_server"] == "GeoNet":
                 earthquake_url = (
                     "https://api.geonet.org.nz/quake?MMI=%s"
@@ -1758,6 +1763,18 @@ class getData(SearchList):
                         except:
                             eqplace = eqdata["features"][0]["properties"]["place"]
                     eqmag = locale.format_string(
+                        "%g", float(eqdata["features"][0]["properties"]["mag"])
+                    )
+                elif self.generator.skin_dict["Extras"]["earthquake_server"] == "ReNaSS":
+                    eqtime = eqdata["features"][0]["properties"]["time"]
+                    # convert time to UNIX format
+                    eqtime = datetime.datetime.strptime(eqtime, "%Y-%m-%dT%H:%M:%S.%fZ")
+                    eqtime = int(
+                        (eqtime - datetime.datetime(1970, 1, 1)).total_seconds()
+                    )
+                    equrl = eqdata["features"][0]["properties"]["url"]
+                    eqplace = eqdata["features"][0]["properties"]["description"]
+                    eqmag = locale.format(
                         "%g", float(eqdata["features"][0]["properties"]["mag"])
                     )
                 elif (
