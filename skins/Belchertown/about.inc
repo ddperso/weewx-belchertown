@@ -28,7 +28,7 @@
        </div>
 
         <div class="col-sm-8" style="padding-top:10px;">
-    <p>Ce site web est mis à jour en temps réel (toutes les 2,5 secondes) grâce à la station météo connectée <a href="https://www.davisinstruments.com/vantage-vue/" target="_blank">Davis Vantage Vue</a> située à Auffargis dans les Yvelines.</p>
+    <p>Ce site web est mis à jour en temps réel grâce à la station météo connectée <a href="https://www.davisinstruments.com/vantage-vue/" target="_blank">Davis Vantage Vue</a> située à Auffargis dans les Yvelines.</p>
     <ul><ul>
 		<img src="/images/vantage_vue.png">
     </ul></ul>
