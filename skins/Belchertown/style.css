@@ -1414,7 +1414,6 @@ p.entry-meta {
 .wx-stn-alert {
     display: none;
     width: 100%;
-	font-weight: bold;
 }
 
 .wx-stn-alert i { color: red; }
