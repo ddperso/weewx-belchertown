@@ -1508,21 +1508,6 @@ class getData(SearchList):
             elif aqi_dominant == "pm10":
                 aqi_dominant = label_dict["aqi_pm10"]
             else:
-                aqi_category = "unknown"
-
-            if aqi_dominant == "pm2.5":
-                aqi_dominant = label_dict["aqi_pm25"]
-            elif aqi_dominant == "o3":
-                aqi_dominant = label_dict["aqi_o3"]
-            elif aqi_dominant == "no2":
-                aqi_dominant = label_dict["aqi_no2"]
-            elif aqi_dominant == "so2":
-                aqi_dominant = label_dict["aqi_so2"]
-            elif aqi_dominant == "co":
-                aqi_dominant = label_dict["aqi_co"]
-            elif aqi_dominant == "pm10":
-                aqi_dominant = label_dict["aqi_pm10"]
-            else:
                 aqi_dominant = "unknown"
 
             try:
@@ -1652,11 +1637,6 @@ class getData(SearchList):
                 earthquake_url = (
                     "http://earthquake.usgs.gov/fdsnws/event/1/query?limit=1&lat=%s&lon=%s&maxradiuskm=%s&format=geojson&nodata=204&minmag=2"
                     % (latitude, longitude, earthquake_maxradiuskm)
-                )
-            elif self.generator.skin_dict["Extras"]["earthquake_server"] == "ReNaSS":
-                earthquake_url = (
-                    "https://renass.unistra.fr/fdsnws/event/1/query?latitude=%s&longitude=%s&maxradius=5&orderby=time&format=json&limit=1&mindepth=1"
-                    % (latitude, longitude)
                 )
             elif self.generator.skin_dict["Extras"]["earthquake_server"] == "GeoNet":
                 earthquake_url = (
@@ -1791,18 +1771,6 @@ class getData(SearchList):
                         except:
                             eqplace = eqdata["features"][0]["properties"]["place"]
                     eqmag = locale.format_string(
-                        "%g", float(eqdata["features"][0]["properties"]["mag"])
-                    )
-                elif self.generator.skin_dict["Extras"]["earthquake_server"] == "ReNaSS":
-                    eqtime = eqdata["features"][0]["properties"]["time"]
-                    # convert time to UNIX format
-                    eqtime = datetime.datetime.strptime(eqtime, "%Y-%m-%dT%H:%M:%S.%fZ")
-                    eqtime = int(
-                        (eqtime - datetime.datetime(1970, 1, 1)).total_seconds()
-                    )
-                    equrl = eqdata["features"][0]["properties"]["url"]
-                    eqplace = eqdata["features"][0]["properties"]["description"]
-                    eqmag = locale.format(
                         "%g", float(eqdata["features"][0]["properties"]["mag"])
                     )
                 elif (
