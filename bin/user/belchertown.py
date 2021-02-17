@@ -1203,7 +1203,7 @@ class getData(SearchList):
                 % (latitude, longitude, forecast_api_id, forecast_api_secret)
             )
             aqi_url = (
-                "https://api.aerisapi.com/airquality/%s,%s?&format=json&client_id=%s&client_secret=%s"
+                "https://api.aerisapi.com/airquality/%s,%s?&format=json&radius=50mi&limit=1&client_id=%s&client_secret=%s"
                 % (latitude, longitude, forecast_api_id, forecast_api_secret)
             )
             if self.generator.skin_dict["Extras"]["forecast_alert_limit"]:
@@ -1479,61 +1479,7 @@ class getData(SearchList):
             elif aqi_dominant == "pm10":
                 aqi_dominant = label_dict["aqi_pm10"]
             else:
-                aqi_category = "unknown"
-
-            if aqi_dominant == "pm2.5":
-                aqi_dominant = label_dict["aqi_pm25"]
-            elif aqi_dominant == "o3":
-                aqi_dominant = label_dict["aqi_o3"]
-            elif aqi_dominant == "no2":
-                aqi_dominant = label_dict["aqi_no2"]
-            elif aqi_dominant == "so2":
-                aqi_dominant = label_dict["aqi_so2"]
-            elif aqi_dominant == "co":
-                aqi_dominant = label_dict["aqi_co"]
-            elif aqi_dominant == "pm10":
-                aqi_dominant = label_dict["aqi_pm10"]
-            else:
                 aqi_dominant = "unknown"
-
-            if label_dict["beaufort0"] != "beaufort0":
-                beaufort0 = label_dict["beaufort0"]
-            else:
-                beaufort0 = "calm"
-            if label_dict["beaufort1"] != "beaufort1":
-                beaufort1 = label_dict["beaufort1"]
-            else:
-                beaufort1 = "light air"
-            if label_dict["beaufort2"] != "beaufort2":
-                beaufort2 = label_dict["beaufort2"]
-            else:
-                beaufort2 = "light breeze"
-            if label_dict["beaufort3"] != "beaufort3":
-                beaufort3 = label_dict["beaufort3"]
-            else:
-                beaufort3 = "gentle breeze"
-            if label_dict["beaufort4"] != "beaufort4":
-                beaufort4 = label_dict["beaufort4"]
-            else:
-                beaufort4 = "moderate breeze"
-            if label_dict["beaufort5"] != "beaufort5":
-                beaufort5 = label_dict["beaufort5"]
-            else:
-                beaufort5 = "fresh breeze"
-            if label_dict["beaufort6"] != "beaufort6":
-                beaufort6 = label_dict["beaufort6"]
-            else:
-                beaufort6 = "strong breeze"
-            if label_dict["beaufort7"] != "beaufort7":
-                beaufort7 = label_dict["beaufort7"]
-            else:
-                beaufort7 = "near gale"
-            if label_dict["beaufort8"] != "beaufort8":
-                beaufort8 = label_dict["beaufort8"]
-            else:
-                beaufort8 = "gale"
-            if label_dict["beaufort9"] != "beaufort9":
-                beaufort9 = label_dict["beaufort9"]
 
             if (
                 len(data["current"][0]["response"]) > 0
@@ -1624,11 +1570,6 @@ class getData(SearchList):
                 earthquake_url = (
                     "http://earthquake.usgs.gov/fdsnws/event/1/query?limit=1&lat=%s&lon=%s&maxradiuskm=%s&format=geojson&nodata=204&minmag=2"
                     % (latitude, longitude, earthquake_maxradiuskm)
-                )
-            elif self.generator.skin_dict["Extras"]["earthquake_server"] == "ReNaSS":
-                earthquake_url = (
-                    "https://renass.unistra.fr/fdsnws/event/1/query?latitude=%s&longitude=%s&maxradius=5&orderby=time&format=json&limit=1&mindepth=1"
-                    % (latitude, longitude)
                 )
             elif self.generator.skin_dict["Extras"]["earthquake_server"] == "GeoNet":
                 earthquake_url = (
@@ -1763,18 +1704,6 @@ class getData(SearchList):
                         except:
                             eqplace = eqdata["features"][0]["properties"]["place"]
                     eqmag = locale.format_string(
-                        "%g", float(eqdata["features"][0]["properties"]["mag"])
-                    )
-                elif self.generator.skin_dict["Extras"]["earthquake_server"] == "ReNaSS":
-                    eqtime = eqdata["features"][0]["properties"]["time"]
-                    # convert time to UNIX format
-                    eqtime = datetime.datetime.strptime(eqtime, "%Y-%m-%dT%H:%M:%S.%fZ")
-                    eqtime = int(
-                        (eqtime - datetime.datetime(1970, 1, 1)).total_seconds()
-                    )
-                    equrl = eqdata["features"][0]["properties"]["url"]
-                    eqplace = eqdata["features"][0]["properties"]["description"]
-                    eqmag = locale.format(
                         "%g", float(eqdata["features"][0]["properties"]["mag"])
                     )
                 elif (
@@ -2182,7 +2111,7 @@ class getData(SearchList):
             "custom_css_exists": custom_css_exists,
             "aqi": aqi,
             "aqi_category": aqi_category,
-			"aqi_dominant": aqi_dominant,
+            "aqi_dominant": aqi_dominant,
             "aqi_location": aqi_location,
             "beaufort0": label_dict["beaufort0"],
             "beaufort1": label_dict["beaufort1"],
