@@ -1,0 +1,13 @@
+.site-inner,
+.wrap {
+	margin: 0 auto;
+	max-width: 1600px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.site-header {
+	min-height: 75px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
