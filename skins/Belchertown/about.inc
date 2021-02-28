@@ -55,6 +55,6 @@
         <li>à Tom Keffer pour le logiciel Open Source <a href="https://github.com/weewx/weewx" target="_blank">WeeWX</a></li>
         <li>à <a href="https://www.infoclimat.fr/" target="_blank">InfoClimat</a> et à <a href="https://www.aerisweather.com/" target="_blank">AerisWeather</a> pour les prévisions</li>
         <li>au réseau <a href="https://www.blitzortung.org/fr/live_lightning_maps.php" target="_blank">Blitzortung</a> pour la détection de foudre en temps réel </li>
-        <li>au réseau <a href="https://renass.unistra.fr/informations/reseau-national-de-surveillance-sismique" target="_blank">RéNaSS</a> (Réseau National de Surveillance Sismique) pour la détection des séismes en France </li>
+        <li>au réseau <a href="http://www.franceseisme.fr/" target="_blank">RéNaSS</a> (Réseau National de Surveillance Sismique) de franceseisme pour la détection des séismes en France </li>
     </ul>
 </div>
