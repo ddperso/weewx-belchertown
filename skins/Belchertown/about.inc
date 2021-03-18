@@ -23,16 +23,16 @@
         <li>Interface station : $station.hardware</li>
         <li>WeeWX version : $station.version</li>
         <li>Belchertown Skin Version : $belchertown_version</li>
-		<li>Date d'installation : Juin 2020</li>
+        <li>Date d'installation : Juin 2020</li>
     </ul>
        </div>
 
         <div class="col-sm-8" style="padding-top:10px;">
-    <p>Ce site web est mis à jour en temps réel grâce à la station météo connectée <a href="https://www.davisinstruments.com/vantage-vue/" target="_blank">Davis Vantage Vue</a> située à Auffargis dans les Yvelines.</p>
+    <p>Ce site web est mis à jour en temps réel grâce à la station météo connectée <a href="https://www.davisinstruments.com/vantage-vue/" target="_blank">Davis Vantage Vue®</a> située à Auffargis dans les Yvelines.</p>
     <ul><ul>
-		<img src="/images/vantage_vue.png">
+        <img src="/images/schema.png">
     </ul></ul>
-	<p>Cette station est intégrée au réseau <a href="https://www.infoclimat.fr/observations-meteo/temps-reel/auffargis/000SC.html" target="_blank">StatIC</a> ainsi qu'aux bases <a href="https://www.infoclimat.fr/climatologie/annee/2020/auffargis/valeurs/000SC.html" target="_blank">climatologique et pluviométrique</a> d'InfoClimat. Lorsque certaines conditions sont remplies, les données sont automatiquement reportées sur <a href="http://meteoalerte.com/france/index.html?area=idf" target="_blank">MétéoAlerte.</a><p>
+    <p>Cette station est intégrée au réseau <a href="https://www.infoclimat.fr/observations-meteo/temps-reel/auffargis/000SC.html" target="_blank">StatIC</a> ainsi qu'aux bases <a href="https://www.infoclimat.fr/climatologie/annee/2020/auffargis/valeurs/000SC.html" target="_blank">climatologique et pluviométrique</a> d'InfoClimat. Lorsque certaines conditions sont remplies, les données sont automatiquement reportées sur <a href="http://meteoalerte.com/france/index.html?area=idf" target="_blank">MétéoAlerte.</a><p>
     <p>Elle fournit les informations suivantes :
     <ul>
         <li>Température, point de rosée</li>
@@ -50,7 +50,7 @@
     </ul>
     <p>Remerciements :</p>
     <ul>
-		<li>à <a href="https://github.com/didjcodt" target="_blank">Didjcodt</a> pour son aide au développement de ce site</li>
+        <li>à <a href="https://github.com/didjcodt" target="_blank">Didjcodt</a> pour son aide au développement de ce site</li>
         <li>à Pat O'Brien pour le thème <a href="https://github.com/poblabs/weewx-belchertown" target="_blank">Belchertown</a></li>
         <li>à Tom Keffer pour le logiciel Open Source <a href="https://github.com/weewx/weewx" target="_blank">WeeWX</a></li>
         <li>à <a href="https://www.infoclimat.fr/" target="_blank">InfoClimat</a> et à <a href="https://www.aerisweather.com/" target="_blank">AerisWeather</a> pour les prévisions</li>
