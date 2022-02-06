@@ -1593,7 +1593,7 @@ class getData(SearchList):
                 maxLong = long + deltaLong
 
                 earthquake_url = (
-                    "https://api.franceseisme.fr/fdsnws/event/1/query?mindepth=0.1&minmagnitude=2&minlatitude=%.2f&minlongitude=%.2f&maxlatitude=%.2f&maxlongitude=%.2f&format=json&limit=1&orderby=time"
+                    "https://api.franceseisme.fr/fdsnws/event/1/query?eventtype=earthquake&minmagnitude=2&minlatitude=%.2f&minlongitude=%.2f&maxlatitude=%.2f&maxlongitude=%.2f&format=json&limit=1&orderby=time"
                     % (minLat, minLong, maxLat, maxLong) 
                 )
             earthquake_is_stale = False
