@@ -100,7 +100,7 @@ aqi = ""
 aqi_category = ""
 aqi_time = 0
 aqi_location = ""
-
+pollens = ""
 
 class getData(SearchList):
     """
@@ -243,6 +243,7 @@ class getData(SearchList):
         global aqi_category
         global aqi_time
         global aqi_location
+        global pollens
 
         # Look for the debug flag which can be used to show more logging
         weewx.debug = int(self.generator.config_dict.get("debug", 0))
@@ -1293,6 +1294,15 @@ class getData(SearchList):
                         response = urlopen(req)
                         aqi_page = response.read()
                         response.close()
+                       # Pollens
+                        import requests
+                        from requests.structures import CaseInsensitiveDict
+                        url = "https://api.airparif.asso.fr/pollens/bulletin"
+                        headers = CaseInsensitiveDict()
+                        headers["accept"] = "application/json"
+                        headers["X-Api-Key"] = "02f76334-1c17-4bd9-4fe1-208745c7c494"
+                        req = requests.get(url, headers=headers)
+                        pollens_page = json.loads(req.text)
                         if (
                             self.generator.skin_dict["Extras"]["forecast_alert_enabled"]
                             == "1"
@@ -1320,6 +1330,7 @@ class getData(SearchList):
                                         "forecast_1hr": [json.loads(forecast_1hr_page)],
                                         "alerts": [json.loads(alerts_page)],
                                         "aqi": [json.loads(aqi_page)],
+                                        "pollens": [pollens_page]
                                     }
                                 )
                             except:
@@ -1348,6 +1359,7 @@ class getData(SearchList):
                                             json.loads(alerts_page.decode("utf-8"))
                                         ],
                                         "aqi": [json.loads(aqi_page.decode("utf-8"))],
+                                        "pollens": [pollens_page]
                                     }
                                 )
                         else:
@@ -1362,6 +1374,7 @@ class getData(SearchList):
                                         "forecast_3hr": [json.loads(forecast_3hr_page)],
                                         "forecast_1hr": [json.loads(forecast_1hr_page)],
                                         "aqi": [json.loads(aqi_page)],
+                                        "pollens": [pollens_page]
                                     }
                                 )
                             except:
@@ -1387,6 +1400,7 @@ class getData(SearchList):
                                             )
                                         ],
                                         "aqi": [json.loads(aqi_page.decode("utf-8"))],
+                                        "pollens": [pollens_page]
                                     }
                                 )
                 except Exception as error:
@@ -1480,6 +1494,23 @@ class getData(SearchList):
                 aqi_dominant = label_dict["aqi_pm10"]
             else:
                 aqi_dominant = "unknown"
+
+            try:
+                pollens = data["pollens"][0]["data"][0]["valeurs"]["78"][-1]
+            except Exception:
+                loginf("No pollens")
+                pollens = ""
+
+            if pollens == 0:
+                pollens = label_dict["pollens_null"]
+            elif pollens == 1:
+                pollens = label_dict["pollens_low"]
+            elif pollens == 2:
+                pollens = label_dict["pollens_average"]
+            elif pollens == 3:
+                pollens = label_dict["pollens_high"]
+            else:
+                pollens = "unknown"
 
             if (
                 len(data["current"][0]["response"]) > 0
@@ -2113,6 +2144,7 @@ class getData(SearchList):
             "aqi_category": aqi_category,
             "aqi_dominant": aqi_dominant,
             "aqi_location": aqi_location,
+            "pollens": pollens,
             "beaufort0": label_dict["beaufort0"],
             "beaufort1": label_dict["beaufort1"],
             "beaufort2": label_dict["beaufort2"],
