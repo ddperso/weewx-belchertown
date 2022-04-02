@@ -257,6 +257,27 @@ function get_aqi_color(aqi, returnColor = false) {
     }
 }
 
+// Change the color of the pollens variable according to RNSA standards
+// (adjusted to match skin colors better)
+function get_pollens_color(pollens, returnColor = false) {
+    if (pollens = 3) {
+        var pollens_color = "rgba(255,2,0,1)";
+    } else if (pollens = 2) {
+        var pollens_color = "rgba(255,127,0,1)";
+    } else if (pollens = 1) {
+        var pollens_color = "rgba(255,255,0,1)";
+    } else if (pollens = 0) {
+        var pollens_color = "#71bc3c";
+    }
+
+    // Return the color value if requested, otherwise just set the div color
+    if (returnColor) {
+        return pollens_color;
+    } else {
+        jQuery(".pollens_outer").css("color", pollens_color);
+    }
+}
+
 function get_gauge_color(value, options) {
     if (options.color1) {
         // Failsafe in case value drops below the lowest color position user has set.

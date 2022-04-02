@@ -42,6 +42,8 @@
                 get_aqi_color( "$aqi" );
                 #end if
 
+                get_pollens_color( "$pollens" );
+
                 #if $Extras.has_key("beaufort_category") and $Extras.beaufort_category == '1'
                 // weewx >= 4.2 can convert to Beaufort directly, but to improve backwards compatibility, convert windSpeed to
                 // knots and then use Javascript function to convert to Beaufort
@@ -241,7 +243,10 @@
                                             #end if
                                         </div>
                                         #end if
-                                    </div>
+                                        <div class="pollens_outer">
+                                            $pollens
+                                        </div>
+                                     </div>
                                     <div class="col-sm-6">
                                         #if $current.appTemp.has_data
                                         <div class="feelslike">$obs.label.feels_like: $current.appTemp</div><!-- AJAX -->
