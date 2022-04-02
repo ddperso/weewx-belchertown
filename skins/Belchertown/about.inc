@@ -56,5 +56,6 @@
         <li>à <a href="https://www.infoclimat.fr/" target="_blank">InfoClimat</a> et à <a href="https://www.aerisweather.com/" target="_blank">AerisWeather</a> pour les prévisions</li>
         <li>au réseau <a href="https://www.blitzortung.org/fr/live_lightning_maps.php" target="_blank">Blitzortung</a> pour la détection de foudre en temps réel </li>
         <li>au réseau <a href="http://www.franceseisme.fr/" target="_blank">RéNaSS</a> (Réseau National de Surveillance Sismique) de franceseisme pour la détection des séismes en France </li>
+        <li>à <a href="https://www.airparif.asso.fr/surveiller-la-pollution/la-pollution-en-direct-en-ile-de-france" target="_blank">Airparif</a> et au réseau <a href="https://www.pollens.fr/" target="_blank">RNSA</a> (Réseau National de Surveillance Aérobiologique) pour la prévention aux risques de pollution et d'allergies aux pollens </li>
     </ul>
 </div>
