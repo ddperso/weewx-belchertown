@@ -1548,6 +1548,27 @@ class getData(SearchList):
             else:
                 qualite_air_txt = "unknown"
 
+            try:
+                qualite_air = data["qualite_air"][0]["78030"][0]["indice"]
+            except Exception:
+                loginf("No qualite_air")
+                qualite_air = ""
+
+            if qualite_air == "Bon":
+                qualite_air = label_dict["qualite_air0"]
+            elif qualite_air == "Moyen":
+                qualite_air = label_dict["qualite_air1"]
+            elif qualite_air == "Dégradé":
+                qualite_air = label_dict["qualite_air2"]
+            elif qualite_air == "Mauvais":
+                qualite_air = label_dict["qualite_air3"]
+            elif qualite_air == "Très Mauvais":
+                qualite_air = label_dict["qualite_air4"]
+            elif qualite_air == "Extrêmement Mauvais":
+                qualite_air = label_dict["qualite_air5"]
+            else:
+                qualite_air = "unknown"
+
             if (
                 len(data["current"][0]["response"]) > 0
                 and self.generator.skin_dict["Extras"]["forecast_aeris_use_metar"]
