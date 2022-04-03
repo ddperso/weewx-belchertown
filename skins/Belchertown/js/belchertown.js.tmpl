@@ -278,6 +278,31 @@ function get_pollens_color(pollens, returnColor = false) {
     }
 }
 
+// Change the color of the qualite_air variable according to Airparif standards
+// (adjusted to match skin colors better)
+function get_qualite_air_color(qualite_air, returnColor = false) {
+    if (qualite_air = "Bon") {
+        var qualite_air_color = "#50f0e6";
+    } else if (qualite_air = "Moyen") {
+        var qualite_air_color = "#50ccaa";
+    } else if (qualite_air = "Dégradé") {
+        var qualite_air_color = "#f0e641";
+    } else if (qualite_air = "Mauvais") {
+        var qualite_air_color = "#ff5050";
+    } else if (qualite_air = "Très Mauvais") {
+        var qualite_air_color = "#960032";
+    } else if (qualite_air = "Extrêmement Mauvais") {
+        var qualite_air_color = "#7d2181";
+    }
+
+    // Return the color value if requested, otherwise just set the div color
+    if (returnColor) {
+        return qualite_air_color;
+    } else {
+        jQuery(".qualite_air_outer").css("color", qualite_air_color);
+    }
+}
+
 function get_gauge_color(value, options) {
     if (options.color1) {
         // Failsafe in case value drops below the lowest color position user has set.

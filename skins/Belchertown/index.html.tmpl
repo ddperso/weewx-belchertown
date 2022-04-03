@@ -43,6 +43,7 @@
                 #end if
 
                 get_pollens_color( "$pollens" );
+                get_qualite_air_color( "$qualite_air" );
 
                 #if $Extras.has_key("beaufort_category") and $Extras.beaufort_category == '1'
                 // weewx >= 4.2 can convert to Beaufort directly, but to improve backwards compatibility, convert windSpeed to
@@ -228,14 +229,7 @@
                                         <div class="current-obs-text">
                                             $current_obs_summary
                                         </div>
-                                        #if $Extras.has_key("aqi_enabled") and $Extras.aqi_enabled == '1'and $aqi > 50
-                                        <div class="aqi_outer">
-                                            $obs.label.aqi: $aqi_category<br/>$aqi_dominant
-                                            #if $Extras.has_key("aqi_location_enabled") and $Extras.aqi_location_enabled == '1'
-                                            <span class="aqi_location_outer"><br>$aqi_location</span>
-                                            #end if
-                                        </div>
-                                        #else
+                                        #if $Extras.has_key("aqi_enabled") and $Extras.aqi_enabled == '1'
                                         <div class="aqi_outer">
                                             $obs.label.aqi: $aqi_category
                                             #if $Extras.has_key("aqi_location_enabled") and $Extras.aqi_location_enabled == '1'
@@ -243,6 +237,9 @@
                                             #end if
                                         </div>
                                         #end if
+                                        <div class="qualite_air_outer">
+                                            $obs.label.qualite_air: $qualite_air
+                                        </div>
                                         <div class="pollens_outer">
                                             $obs.label.pollens: $pollens
                                         </div>
