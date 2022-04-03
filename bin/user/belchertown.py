@@ -1295,12 +1295,13 @@ class getData(SearchList):
                         aqi_page = response.read()
                         response.close()
                        # Pollens
+                        airparif_key = self.generator.skin_dict["Extras"]["airparif_key"]
                         import requests
                         from requests.structures import CaseInsensitiveDict
                         url = "https://api.airparif.asso.fr/pollens/bulletin"
                         headers = CaseInsensitiveDict()
                         headers["accept"] = "application/json"
-                        headers["X-Api-Key"] = "02f76334-1c17-4bd9-4fe1-208745c7c494"
+                        headers["X-Api-Key"] = airparif_key
                         req = requests.get(url, headers=headers)
                         pollens_page = json.loads(req.text)
                         if (
