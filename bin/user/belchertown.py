@@ -101,6 +101,7 @@ aqi_category = ""
 aqi_time = 0
 aqi_location = ""
 pollens = ""
+qualite_air = ""
 
 class getData(SearchList):
     """
@@ -244,6 +245,7 @@ class getData(SearchList):
         global aqi_time
         global aqi_location
         global pollens
+        global qualite_air
 
         # Look for the debug flag which can be used to show more logging
         weewx.debug = int(self.generator.config_dict.get("debug", 0))
@@ -1294,7 +1296,7 @@ class getData(SearchList):
                         response = urlopen(req)
                         aqi_page = response.read()
                         response.close()
-                       # Pollens
+                        # Pollens
                         airparif_key = self.generator.skin_dict["Extras"]["airparif_key"]
                         import requests
                         from requests.structures import CaseInsensitiveDict
@@ -1304,6 +1306,13 @@ class getData(SearchList):
                         headers["X-Api-Key"] = airparif_key
                         req = requests.get(url, headers=headers)
                         pollens_page = json.loads(req.text)
+                        # Qualité de l'air
+                        url = "https://api.airparif.asso.fr/indices/prevision/commune?insee=78030"
+                        headers = CaseInsensitiveDict()
+                        headers["accept"] = "application/json"
+                        headers["X-Api-Key"] = airparif_key
+                        req = requests.get(url, headers=headers)
+                        qualite_air_page = json.loads(req.text)
                         if (
                             self.generator.skin_dict["Extras"]["forecast_alert_enabled"]
                             == "1"
@@ -1331,7 +1340,8 @@ class getData(SearchList):
                                         "forecast_1hr": [json.loads(forecast_1hr_page)],
                                         "alerts": [json.loads(alerts_page)],
                                         "aqi": [json.loads(aqi_page)],
-                                        "pollens": [pollens_page]
+                                        "pollens": [pollens_page],
+                                        "qualite_air": [qualite_air_page]
                                     }
                                 )
                             except:
@@ -1360,7 +1370,8 @@ class getData(SearchList):
                                             json.loads(alerts_page.decode("utf-8"))
                                         ],
                                         "aqi": [json.loads(aqi_page.decode("utf-8"))],
-                                        "pollens": [pollens_page]
+                                        "pollens": [pollens_page],
+                                        "qualite_air": [qualite_air_page]
                                     }
                                 )
                         else:
@@ -1375,7 +1386,8 @@ class getData(SearchList):
                                         "forecast_3hr": [json.loads(forecast_3hr_page)],
                                         "forecast_1hr": [json.loads(forecast_1hr_page)],
                                         "aqi": [json.loads(aqi_page)],
-                                        "pollens": [pollens_page]
+                                        "pollens": [pollens_page],
+                                        "qualite_air": [qualite_air_page]
                                     }
                                 )
                             except:
@@ -1401,7 +1413,8 @@ class getData(SearchList):
                                             )
                                         ],
                                         "aqi": [json.loads(aqi_page.decode("utf-8"))],
-                                        "pollens": [pollens_page]
+                                        "pollens": [pollens_page],
+                                        "qualite_air": [qualite_air_page]
                                     }
                                 )
                 except Exception as error:
@@ -1432,7 +1445,6 @@ class getData(SearchList):
             # Process the forecast file
             with open(forecast_file, "r") as read_file:
                 data = json.load(read_file)
-
             try:
                 cloud_cover = "{}%".format(data["current"][0]["response"]["ob"]["sky"])
             except Exception:
@@ -1512,6 +1524,27 @@ class getData(SearchList):
                 pollens = label_dict["pollens_high"]
             else:
                 pollens = "unknown"
+
+            try:
+                qualite_air = data["qualite_air"][0]["78030"][0]["indice"]
+            except Exception:
+                loginf("No qualite_air")
+                qualite_air = ""
+
+            if qualite_air == "Bon":
+                qualite_air = label_dict["qualite_air0"]
+            elif qualite_air == "Moyen":
+                qualite_air = label_dict["qualite_air1"]
+            elif qualite_air == "Dégradé":
+                qualite_air = label_dict["qualite_air2"]
+            elif qualite_air == "Mauvais":
+                qualite_air = label_dict["qualite_air3"]
+            elif qualite_air == "Très Mauvais":
+                qualite_air = label_dict["qualite_air4"]
+            elif qualite_air == "Extrêmement Mauvais":
+                qualite_air = label_dict["qualite_air5"]
+            else:
+                qualite_air = "unknown"
 
             if (
                 len(data["current"][0]["response"]) > 0
@@ -2146,6 +2179,7 @@ class getData(SearchList):
             "aqi_dominant": aqi_dominant,
             "aqi_location": aqi_location,
             "pollens": pollens,
+            "qualite_air": qualite_air,
             "beaufort0": label_dict["beaufort0"],
             "beaufort1": label_dict["beaufort1"],
             "beaufort2": label_dict["beaufort2"],
