@@ -1555,19 +1555,19 @@ class getData(SearchList):
                 qualite_air = ""
 
             if qualite_air == "Bon":
-                qualite_air = label_dict["qualite_air0"]
+                qualite_air_txt = label_dict["qualite_air0"]
             elif qualite_air == "Moyen":
-                qualite_air = label_dict["qualite_air1"]
+                qualite_air_txt = label_dict["qualite_air1"]
             elif qualite_air == "Dégradé":
-                qualite_air = label_dict["qualite_air2"]
+                qualite_air_txt = label_dict["qualite_air2"]
             elif qualite_air == "Mauvais":
-                qualite_air = label_dict["qualite_air3"]
+                qualite_air_txt = label_dict["qualite_air3"]
             elif qualite_air == "Très Mauvais":
-                qualite_air = label_dict["qualite_air4"]
+                qualite_air_txt = label_dict["qualite_air4"]
             elif qualite_air == "Extrêmement Mauvais":
-                qualite_air = label_dict["qualite_air5"]
+                qualite_air_txt = label_dict["qualite_air5"]
             else:
-                qualite_air = "unknown"
+                qualite_air_txt = "unknown"
 
             if (
                 len(data["current"][0]["response"]) > 0
