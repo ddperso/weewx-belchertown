@@ -101,7 +101,9 @@ aqi_category = ""
 aqi_time = 0
 aqi_location = ""
 pollens = ""
+pollens_txt = ""
 qualite_air = ""
+qualite_air_txt = ""
 
 class getData(SearchList):
     """
@@ -1515,15 +1517,15 @@ class getData(SearchList):
                 pollens = ""
 
             if pollens == 0:
-                pollens = label_dict["pollens_null"]
+                pollens_txt = label_dict["pollens_null"]
             elif pollens == 1:
-                pollens = label_dict["pollens_low"]
+                pollens_txt = label_dict["pollens_low"]
             elif pollens == 2:
-                pollens = label_dict["pollens_average"]
+                pollens_txt = label_dict["pollens_average"]
             elif pollens == 3:
-                pollens = label_dict["pollens_high"]
+                pollens_txt = label_dict["pollens_high"]
             else:
-                pollens = "unknown"
+                pollens_txt = "unknown"
 
             try:
                 qualite_air = data["qualite_air"][0]["78030"][0]["indice"]
@@ -1532,19 +1534,19 @@ class getData(SearchList):
                 qualite_air = ""
 
             if qualite_air == "Bon":
-                qualite_air = label_dict["qualite_air0"]
+                qualite_air_txt = label_dict["qualite_air0"]
             elif qualite_air == "Moyen":
-                qualite_air = label_dict["qualite_air1"]
+                qualite_air_txt = label_dict["qualite_air1"]
             elif qualite_air == "Dégradé":
-                qualite_air = label_dict["qualite_air2"]
+                qualite_air_txt = label_dict["qualite_air2"]
             elif qualite_air == "Mauvais":
-                qualite_air = label_dict["qualite_air3"]
+                qualite_air_txt = label_dict["qualite_air3"]
             elif qualite_air == "Très Mauvais":
-                qualite_air = label_dict["qualite_air4"]
+                qualite_air_txt = label_dict["qualite_air4"]
             elif qualite_air == "Extrêmement Mauvais":
-                qualite_air = label_dict["qualite_air5"]
+                qualite_air_txt = label_dict["qualite_air5"]
             else:
-                qualite_air = "unknown"
+                qualite_air_txt = "unknown"
 
             if (
                 len(data["current"][0]["response"]) > 0
@@ -2179,7 +2181,9 @@ class getData(SearchList):
             "aqi_dominant": aqi_dominant,
             "aqi_location": aqi_location,
             "pollens": pollens,
+            "pollens_txt": pollens_txt,
             "qualite_air": qualite_air,
+            "qualite_air_txt": qualite_air_txt,
             "beaufort0": label_dict["beaufort0"],
             "beaufort1": label_dict["beaufort1"],
             "beaufort2": label_dict["beaufort2"],
