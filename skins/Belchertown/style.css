@@ -1118,7 +1118,7 @@ p.entry-meta {
 
 /* # Media Queries
 ---------------------------------------------------------------------------------------------------- */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 10px) {
 
     .genesis-nav-menu.responsive-menu > .menu-item > .sub-menu,
 	.genesis-nav-menu.responsive-menu {
