@@ -1299,14 +1299,15 @@ class getData(SearchList):
                         aqi_page = response.read()
                         response.close()
                         # Pollens
-                        pollens_url = "https://www.pollens.fr/risks/thea/counties/78"
-                        req = Request(pollens_url, None, headers)
-                        response = urlopen(req)
-                        pollens_page = response.read()
-                        response.close()
                         airparif_key = self.generator.skin_dict["Extras"]["airparif_key"]
                         import requests
                         from requests.structures import CaseInsensitiveDict
+                        url = "https://api.airparif.asso.fr/pollens/bulletin"
+                        headers = CaseInsensitiveDict()
+                        headers["accept"] = "application/json"
+                        headers["X-Api-Key"] = airparif_key
+                        req = requests.get(url, headers=headers)
+                        pollens_page = json.loads(req.text)
                         # Qualité de l'air
                         url = "https://api.airparif.asso.fr/indices/prevision/commune?insee=78030"
                         headers = CaseInsensitiveDict()
@@ -1341,7 +1342,7 @@ class getData(SearchList):
                                         "forecast_1hr": [json.loads(forecast_1hr_page)],
                                         "alerts": [json.loads(alerts_page)],
                                         "aqi": [json.loads(aqi_page)],
-                                        "pollens": [json.loads(pollens_page)],
+                                        "pollens": [pollens_page],
                                         "qualite_air": [qualite_air_page]
                                     }
                                 )
@@ -1371,7 +1372,7 @@ class getData(SearchList):
                                             json.loads(alerts_page.decode("utf-8"))
                                         ],
                                         "aqi": [json.loads(aqi_page.decode("utf-8"))],
-                                        "pollens": [json.loads(pollens_page.decode("utf-8"))],
+                                        "pollens": [pollens_page],
                                         "qualite_air": [qualite_air_page]
                                     }
                                 )
@@ -1387,7 +1388,7 @@ class getData(SearchList):
                                         "forecast_3hr": [json.loads(forecast_3hr_page)],
                                         "forecast_1hr": [json.loads(forecast_1hr_page)],
                                         "aqi": [json.loads(aqi_page)],
-                                        "pollens": [json.loads(pollens_page)],
+                                        "pollens": [pollens_page],
                                         "qualite_air": [qualite_air_page]
                                     }
                                 )
@@ -1414,7 +1415,7 @@ class getData(SearchList):
                                             )
                                         ],
                                         "aqi": [json.loads(aqi_page.decode("utf-8"))],
-                                        "pollens": [json.loads(pollens_page.decode("utf-8"))],
+                                        "pollens": [pollens_page],
                                         "qualite_air": [qualite_air_page]
                                     }
                                 )
@@ -1510,8 +1511,7 @@ class getData(SearchList):
                 aqi_dominant = "unknown"
 
             try:
-                # pollens = data["pollens"][0]["data"][0]["valeurs"]["78"][-1]
-                pollens = data["pollens"][0]["riskLevel"]
+                pollens = data["pollens"][0]["data"][0]["valeurs"]["78"][-1]
             except Exception:
                 loginf("No pollens")
                 pollens = ""
