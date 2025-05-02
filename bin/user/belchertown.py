@@ -1208,7 +1208,7 @@ class getData(SearchList):
                 % (latitude, longitude, forecast_api_id, forecast_api_secret)
             )
             aqi_url = (
-                "https://api.aerisapi.com/airquality/%s,%s?&format=json&radius=50mi&limit=1&client_id=%s&client_secret=%s"
+                "https://api.aerisapi.com/airquality/closest?p=%s,%s&format=json&radius=50mi&limit=1&client_id=%s&client_secret=%s"
                 % (latitude, longitude, forecast_api_id, forecast_api_secret)
             )
             if self.generator.skin_dict["Extras"]["forecast_alert_limit"]:
@@ -1447,6 +1447,7 @@ class getData(SearchList):
             # Process the forecast file
             with open(forecast_file, "r") as read_file:
                 data = json.load(read_file)
+
             try:
                 cloud_cover = "{}%".format(data["current"][0]["response"]["ob"]["sky"])
             except Exception:
@@ -1459,7 +1460,6 @@ class getData(SearchList):
                 ):
                     aqi = data["aqi"][0]["response"][0]["periods"][0]["aqi"]
                     aqi_category = data["aqi"][0]["response"][0]["periods"][0]["category"]
-                    aqi_dominant = data['aqi'][0]['response'][0]['periods'][0]['dominant']
                     aqi_time = data["aqi"][0]["response"][0]["periods"][0]["timestamp"]
                     aqi_location = data["aqi"][0]["response"][0]["place"]["name"].title()
                 elif (
@@ -1494,21 +1494,6 @@ class getData(SearchList):
                 aqi_category = label_dict["aqi_hazardous"]
             else:
                 aqi_category = label_dict["aqi_unknown"]
-
-            if aqi_dominant == "pm2.5":
-                aqi_dominant = label_dict["aqi_pm25"]
-            elif aqi_dominant == "o3":
-                aqi_dominant = label_dict["aqi_o3"]
-            elif aqi_dominant == "no2":
-                aqi_dominant = label_dict["aqi_no2"]
-            elif aqi_dominant == "so2":
-                aqi_dominant = label_dict["aqi_so2"]
-            elif aqi_dominant == "co":
-                aqi_dominant = label_dict["aqi_co"]
-            elif aqi_dominant == "pm10":
-                aqi_dominant = label_dict["aqi_pm10"]
-            else:
-                aqi_dominant = "unknown"
 
             try:
                 pollens = data["pollens"][0]["data"][0]["valeurs"]["78"][-1]
@@ -2178,7 +2163,6 @@ class getData(SearchList):
             "custom_css_exists": custom_css_exists,
             "aqi": aqi,
             "aqi_category": aqi_category,
-            "aqi_dominant": aqi_dominant,
             "aqi_location": aqi_location,
             "pollens": pollens,
             "pollens_txt": pollens_txt,
