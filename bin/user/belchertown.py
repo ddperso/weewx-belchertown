@@ -102,8 +102,10 @@ aqi_time = 0
 aqi_location = ""
 pollens = ""
 pollens_txt = ""
+pollen_responsable = ""
 qualite_air = ""
 qualite_air_txt = ""
+atmo_key = ""
 
 class getData(SearchList):
     """
@@ -1208,7 +1210,7 @@ class getData(SearchList):
                 % (latitude, longitude, forecast_api_id, forecast_api_secret)
             )
             aqi_url = (
-                "https://api.aerisapi.com/airquality/closest?p=%s,%s&format=json&radius=50mi&limit=1&client_id=%s&client_secret=%s"
+                "https://api.aerisapi.com/airquality/%s,%s?&format=json&radius=50mi&limit=1&client_id=%s&client_secret=%s"
                 % (latitude, longitude, forecast_api_id, forecast_api_secret)
             )
             if self.generator.skin_dict["Extras"]["forecast_alert_limit"]:
@@ -1299,18 +1301,29 @@ class getData(SearchList):
                         aqi_page = response.read()
                         response.close()
                         # Pollens
-                        airparif_key = self.generator.skin_dict["Extras"]["airparif_key"]
                         import requests
-                        from requests.structures import CaseInsensitiveDict
-                        url = "https://api.airparif.asso.fr/pollens/bulletin"
-                        headers = CaseInsensitiveDict()
+                        def get_bearer_token():
+                            headers = {
+                                    'accept': 'application/json',
+                                    'Content-Type': 'application/json',
+                                    }
+                            json_data = {
+                                    'username': 'ddperso',
+                                    'password': 'VfYK2zK7zZ&1EaK5',
+                                    }
+                            response = requests.post('https://admindata.atmo-france.org/api/login', headers=headers, json=json_data)
+                            return response.json()["token"]
+                        token = get_bearer_token()
+                        token = "Bearer " + token
+                        url = "https://admindata.atmo-france.org/api/v2/data/indices/pollens?code_zone=78030"
                         headers["accept"] = "application/json"
-                        headers["X-Api-Key"] = airparif_key
+                        headers["Authorization"] = token
                         req = requests.get(url, headers=headers)
                         pollens_page = json.loads(req.text)
                         # Qualité de l'air
+                        airparif_key = self.generator.skin_dict["Extras"]["airparif_key"]
                         url = "https://api.airparif.asso.fr/indices/prevision/commune?insee=78030"
-                        headers = CaseInsensitiveDict()
+#                        headers = CaseInsensitiveDict()
                         headers["accept"] = "application/json"
                         headers["X-Api-Key"] = airparif_key
                         req = requests.get(url, headers=headers)
@@ -1447,7 +1460,6 @@ class getData(SearchList):
             # Process the forecast file
             with open(forecast_file, "r") as read_file:
                 data = json.load(read_file)
-
             try:
                 cloud_cover = "{}%".format(data["current"][0]["response"]["ob"]["sky"])
             except Exception:
@@ -1460,6 +1472,7 @@ class getData(SearchList):
                 ):
                     aqi = data["aqi"][0]["response"][0]["periods"][0]["aqi"]
                     aqi_category = data["aqi"][0]["response"][0]["periods"][0]["category"]
+                    aqi_dominant = data['aqi'][0]['response'][0]['periods'][0]['dominant']
                     aqi_time = data["aqi"][0]["response"][0]["periods"][0]["timestamp"]
                     aqi_location = data["aqi"][0]["response"][0]["place"]["name"].title()
                 elif (
@@ -1495,20 +1508,43 @@ class getData(SearchList):
             else:
                 aqi_category = label_dict["aqi_unknown"]
 
+            if aqi_dominant == "pm2.5":
+                aqi_dominant = label_dict["aqi_pm25"]
+            elif aqi_dominant == "o3":
+                aqi_dominant = label_dict["aqi_o3"]
+            elif aqi_dominant == "no2":
+                aqi_dominant = label_dict["aqi_no2"]
+            elif aqi_dominant == "so2":
+                aqi_dominant = label_dict["aqi_so2"]
+            elif aqi_dominant == "co":
+                aqi_dominant = label_dict["aqi_co"]
+            elif aqi_dominant == "pm10":
+                aqi_dominant = label_dict["aqi_pm10"]
+            else:
+                aqi_dominant = "unknown"
+
             try:
-                pollens = data["pollens"][0]["data"][0]["valeurs"]["78"][-1]
+                pollens = data["pollens"][0]["features"][0]["properties"]["code_qual"]
+                pollen_responsable = data["pollens"][0]["features"][0]["properties"]["pollen_resp"]
             except Exception:
                 loginf("No pollens")
                 pollens = ""
+                pollen_responsable = ""
 
             if pollens == 0:
                 pollens_txt = label_dict["pollens_null"]
             elif pollens == 1:
-                pollens_txt = label_dict["pollens_low"]
+                pollens_txt = label_dict["pollens_very_low"]
             elif pollens == 2:
-                pollens_txt = label_dict["pollens_average"]
+                pollens_txt = label_dict["pollens_low"]
             elif pollens == 3:
+                pollens_txt = label_dict["pollens_average"]
+            elif pollens == 4:
                 pollens_txt = label_dict["pollens_high"]
+            elif pollens == 5:
+                pollens_txt = label_dict["pollens_very_high"]
+            elif pollens == 6:
+                pollens_txt = label_dict["pollens_extreme"]
             else:
                 pollens_txt = "unknown"
 
@@ -2163,9 +2199,11 @@ class getData(SearchList):
             "custom_css_exists": custom_css_exists,
             "aqi": aqi,
             "aqi_category": aqi_category,
+            "aqi_dominant": aqi_dominant,
             "aqi_location": aqi_location,
             "pollens": pollens,
             "pollens_txt": pollens_txt,
+            "pollen_responsable": pollen_responsable,
             "qualite_air": qualite_air,
             "qualite_air_txt": qualite_air_txt,
             "beaufort0": label_dict["beaufort0"],

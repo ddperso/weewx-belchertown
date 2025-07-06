@@ -263,11 +263,17 @@ function get_pollens_color(pollens, returnColor = false) {
     if (pollens == 0) {
         var pollens_color = "#71bc3c";
     } else if (pollens == 1) {
-        var pollens_color = "rgba(255,255,0,1)";
+        var pollens_color = "#4fefe6";
     } else if (pollens == 2) {
-        var pollens_color = "rgba(255,127,0,1)";
+        var pollens_color = "#4fcba9";
     } else if (pollens == 3) {
-        var pollens_color = "rgba(255,2,0,1)";
+        var pollens_color = "#ece560";
+    } else if (pollens == 4) {
+        var pollens_color = "#ec5d57";
+    } else if (pollens == 5) {
+        var pollens_color = "#960032";
+    } else if (pollens == 6) {
+        var pollens_color = "#872181";
     }
 
     // Return the color value if requested, otherwise just set the div color
@@ -286,13 +292,13 @@ function get_qualite_air_color(qualite_air, returnColor = false) {
     } else if (qualite_air == "Moyen") {
         var qualite_air_color = "#50ccaa";
     } else if (qualite_air == "Dégradé") {
-        var qualite_air_color = "#f0e641";
+        var qualite_air_color = "#ede661";
     } else if (qualite_air == "Mauvais") {
-        var qualite_air_color = "#ff5050";
+        var qualite_air_color = "#ec5852";
     } else if (qualite_air == "Très Mauvais") {
-        var qualite_air_color = "#960032";
+        var qualite_air_color = "#891a34";
     } else if (qualite_air == "Extrêmement Mauvais") {
-        var qualite_air_color = "#7d2181";
+        var qualite_air_color = "#73287d";
     }
 
     // Return the color value if requested, otherwise just set the div color
