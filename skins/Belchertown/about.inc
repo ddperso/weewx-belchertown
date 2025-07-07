@@ -5,7 +5,7 @@
     <div class="row" style="margin-top:15px;">
 
         <div class="col-sm-4">
-            <img src="/images/station.jpg">
+            <img src="../images/station.jpg">
     <p> </p>
      <p>Données transmises vers les centres météorologiques :</p>
     <ul>
@@ -30,7 +30,7 @@
         <div class="col-sm-8" style="padding-top:10px;">
     <p>Ce site web est mis à jour en temps réel grâce à la station météo connectée <a href="https://www.davisinstruments.com/vantage-vue/" target="_blank">Davis Vantage Vue®</a> située à Auffargis dans les Yvelines.</p>
     <ul><ul>
-        <img src="/images/schema.png">
+        <img src="../images/schema.png">
     </ul></ul>
     <p>Cette station est intégrée au réseau <a href="https://www.infoclimat.fr/observations-meteo/temps-reel/auffargis/000SC.html" target="_blank">StatIC</a> ainsi qu'aux bases <a href="https://www.infoclimat.fr/climatologie/annee/2020/auffargis/valeurs/000SC.html" target="_blank">climatologique et pluviométrique</a> d'InfoClimat. Lorsque certaines conditions sont remplies, les données sont automatiquement reportées sur <a href="http://meteoalerte.com/france/index.html?area=idf" target="_blank">MétéoAlerte.</a><p>
     <p>Elle fournit les informations suivantes :
@@ -56,6 +56,6 @@
         <li>à <a href="https://www.infoclimat.fr/" target="_blank">InfoClimat</a> et à <a href="https://www.aerisweather.com/" target="_blank">AerisWeather</a> pour les prévisions</li>
         <li>au réseau <a href="https://www.blitzortung.org/fr/live_lightning_maps.php" target="_blank">Blitzortung</a> pour la détection de foudre en temps réel </li>
         <li>au réseau <a href="http://www.franceseisme.fr/" target="_blank">RéNaSS</a> (Réseau National de Surveillance Sismique) de franceseisme pour la détection des séismes en France </li>
-        <li>à <a href="https://www.airparif.asso.fr/surveiller-la-pollution/la-pollution-en-direct-en-ile-de-france" target="_blank">Airparif</a> et au réseau <a href="https://www.pollens.fr/" target="_blank">RNSA</a> (Réseau National de Surveillance Aérobiologique) pour la prévention aux risques de pollution et d'allergies aux pollens </li>
+        <li>à <a href="https://www.airparif.asso.fr/surveiller-la-pollution/la-pollution-en-direct-en-ile-de-france" target="_blank">Airparif</a> et à <a href="https://www.atmo-france.org/" target="_blank">Atmo France</a> (Fédération des Associations agréées de surveillance de la qualité de l'air) pour la prévention aux risques de pollution et d'allergies aux pollens </li>
     </ul>
 </div>
