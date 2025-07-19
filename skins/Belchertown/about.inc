@@ -46,11 +46,11 @@
         <li><a href="http://www.weewx.com/" target="_blank">Weewx</a> Logiciel de récupération des données</li>
         <li><a href="http://www.highcharts.com/" target="_blank">HighCharts</a> Pour les graphiques</li>
         <li><a href="https://github.com/poblabs/weewx-belchertown" target="_blank">Belchertown skin</a> Thème créé pour s'intégrer avec Weewx</li>
-        <li><a href="https://obrienlabs.net/go/mqttbroker" target="_blank">MQTT</a> Pour les données instantanées disponibles sur la page d'accueil</li>
+        <li><a href="https://github.com/weewx/weewx/wiki/mqtt" target="_blank">MQTT</a> Pour les données instantanées disponibles sur la page d'accueil</li>
     </ul>
     <p>Remerciements :</p>
     <ul>
-        <li>à <a href="https://github.com/didjcodt" target="_blank">Didjcodt</a> pour son aide au développement de ce site</li>
+        <li>à Clément pour son aide au développement de ce site</li>
         <li>à Pat O'Brien pour le thème <a href="https://github.com/poblabs/weewx-belchertown" target="_blank">Belchertown</a></li>
         <li>à Tom Keffer pour le logiciel Open Source <a href="https://github.com/weewx/weewx" target="_blank">WeeWX</a></li>
         <li>à <a href="https://www.infoclimat.fr/" target="_blank">InfoClimat</a> et à <a href="https://www.aerisweather.com/" target="_blank">AerisWeather</a> pour les prévisions</li>
